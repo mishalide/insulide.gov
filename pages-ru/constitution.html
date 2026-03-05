@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Конституционная хартия — Республика Инсулид</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --navy: #0a1628; --navy-mid: #112240; --gold: #c9a84c; --gold-light: #e8c97a; --slate: #8a9bb5; --white: #f8f7f4; --offwhite: #edeae3; --border: rgba(201,168,76,0.25); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: #1a1a2e; }
+    .gov-bar { background: #f0f0f0; border-bottom: 1px solid #ddd; padding: 6px 48px; display: flex; justify-content: space-between; align-items: center; }
+    .gov-bar-left { display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #333; }
+    .gov-bar-right { display: flex; align-items: center; gap: 16px; font-size: 0.72rem; }
+    .gov-bar-right a { color: #333; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .gov-bar-right a:hover { border-bottom-color: #333; }
+    .gov-bar-right .lang-active { font-weight: 500; color: var(--navy); }
+    .gov-bar-right .divider { color: #bbb; }
+    header { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+    .coat-of-arms { width: 44px; height: 44px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+    .logo-text .nation { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.04em; color: var(--white); display: block; }
+    .logo-text .subtitle { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; display: block; margin-top: 1px; }
+    .back-link { color: var(--slate); font-size: 0.78rem; text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold-light); }
+    .page-hero { background: var(--navy); padding: 80px 48px 60px; text-align: center; }
+    .page-hero .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300; color: var(--white); margin-bottom: 16px; line-height: 1.2; }
+    .page-hero .meta { font-size: 0.78rem; color: var(--slate); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+    .doc-wrap { max-width: 820px; margin: 0 auto; padding: 80px 48px 120px; }
+    .placeholder-notice { background: var(--offwhite); border-left: 3px solid var(--gold); padding: 20px 28px; margin-bottom: 60px; font-size: 0.82rem; color: #555; line-height: 1.7; }
+    .placeholder-notice strong { color: var(--navy); }
+    .preamble { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; line-height: 1.85; color: #2a2a3e; font-style: italic; margin-bottom: 60px; padding-bottom: 60px; border-bottom: 1px solid var(--border); }
+    .chapter { margin-bottom: 56px; }
+    .chapter-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+    .chapter h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 28px; color: var(--navy); }
+    .article { margin-bottom: 28px; padding-left: 20px; border-left: 2px solid var(--border); }
+    .article-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 6px; }
+    .article p { font-size: 0.92rem; line-height: 1.8; color: #333; }
+    .ratification { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; }
+    .ratification p { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #666; font-style: italic; margin-bottom: 6px; }
+    .ratification .sig { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--navy); margin-top: 16px; }
+    footer { background: var(--navy); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 0.7rem; color: var(--slate); font-family: 'DM Mono', monospace; }
+    footer a { color: var(--slate); text-decoration: none; }
+    footer a:hover { color: var(--gold-light); }
+  </style>
+</head>
+<body>
+  <div class="gov-bar">
+    <div class="gov-bar-left"><span>🏝️</span><span>Официальный сайт правительства Республики Инсулид</span></div>
+    <div class="gov-bar-right">
+      <a href="../pages-en/constitution.html">EN</a><span class="divider">|</span>
+      <a href="../pages-fr/constitution.html">FR</a><span class="divider">|</span>
+      <span class="lang-active">RU</span><span class="divider">|</span>
+      <a href="accessibility.html">Доступность</a>
+    </div>
+  </div>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html"><div class="coat-of-arms">⚖️</div><div class="logo-text"><span class="nation">Республика Инсулид</span><span class="subtitle">Официальный правительственный портал</span></div></a>
+      <a class="back-link" href="index.html">← Вернуться на портал</a>
+    </div>
+  </header>
+  <div class="page-hero">
+    <div class="eyebrow">Основополагающий документ</div>
+    <h1>Конституционная хартия<br>Республики Инсулид</h1>
+    <div class="meta">РАТИФИЦИРОВАНА — 1 ЯНВАРЯ 2024 — РЕЕСТРОВЫЙ №: CONST-001-RU</div>
+  </div>
+  <div class="doc-wrap">
+    <div class="placeholder-notice"><strong>Уведомление:</strong> Данный документ является предварительным. Полная Конституционная хартия Республики Инсулид в настоящее время разрабатывается Канцелярией Канцлера и будет опубликована в окончательной редакции после ратификации.</div>
+    <div class="preamble">Мы, граждане-основатели Республики Инсулид, признавая географическое преимущество, ставящее нас на перекрёсток мировой торговли, и стремясь к обществу, управляемому разумом, связанному законом и открытому для всех, кто приходит с добрыми намерениями, — настоящим учреждаем данную Хартию в качестве высшего закона нашей Республики.</div>
+    <div class="chapter">
+      <div class="chapter-label">Глава I</div>
+      <h2>Государство и его суверенитет</h2>
+      <div class="article"><div class="article-num">СТАТЬЯ 1</div><p>Республика Инсулид является суверенным, независимым и демократическим государством. Её суверенитет абсолютен и неделим. Ни одна внешняя власть не вправе законодательствовать в отношении территории Инсулида, управлять ею или претендовать на юрисдикцию над ней без прямого согласия её Парламента.</p></div>
+      <div class="article"><div class="article-num">СТАТЬЯ 2</div><p>Территория Инсулида включает остров и все его инженерные расширения, территориальные воды шириной 12 морских миль от исходной линии, а также исключительную экономическую зону протяжённостью 200 морских миль.</p></div>
+      <div class="article"><div class="article-num">СТАТЬЯ 3</div><p>Официальными языками Республики являются английский, французский и русский. Все законы, официальные документы и правительственные сообщения публикуются на всех трёх языках. В случае коллизии между версиями преимущественную силу имеет текст на английском языке.</p></div>
+    </div>
+    <div class="chapter">
+      <div class="chapter-label">Глава II</div>
+      <h2>Основные права</h2>
+      <div class="article"><div class="article-num">СТАТЬЯ 4</div><p>Все лица на территории Инсулида равны перед законом. Никто не может подвергаться дискриминации по признаку происхождения, языка, убеждений или экономического положения.</p></div>
+      <div class="article"><div class="article-num">СТАТЬЯ 5</div><p>Право собственности гарантируется. Никакое имущество не может быть экспроприировано иначе как в явных публичных интересах и при условии выплаты справедливой и незамедлительной компенсации.</p></div>
+      <div class="article"><div class="article-num">СТАТЬЯ 6</div><p>Свобода торговли является конституционным правом. Ни один закон не вправе вводить таможенные пошлины на транзитные товары через Порт Инсулида. Настоящее положение не может быть изменено простым парламентским большинством.</p></div>
+    </div>
+    <div class="chapter">
+      <div class="chapter-label">Глава III</div>
+      <h2>Управление и Парламент</h2>
+      <div class="article"><div class="article-num">СТАТЬЯ 7</div><p>Парламент Инсулида располагается в Башне Управления и является высшим законодательным органом Республики. Он заседает на постоянной основе и не может быть распущен более чем на 14 последовательных дней.</p></div>
+      <div class="article"><div class="article-num">СТАТЬЯ 8</div><p>Министры назначаются на основании подтверждённой компетентности в своём портфеле. Политическая принадлежность не является критерием назначения или отстранения министров.</p></div>
+    </div>
+    <div class="chapter">
+      <div class="chapter-label">Глава IV</div>
+      <h2>Экономические положения</h2>
+      <div class="article"><div class="article-num">СТАТЬЯ 9</div><p>Ставка корпоративного налога не может превышать 8,5% от чистой прибыли. Данная ставка конституционно зафиксирована и может быть только снижена, но не повышена, за исключением случаев проведения референдума граждан с явкой не менее двух третей.</p></div>
+      <div class="article"><div class="article-num">СТАТЬЯ 10</div><p>Биржа ценных бумаг Инсулида функционирует как независимый институт под законодательным регулированием. Её система управления свободна от прямого парламентского вмешательства в повседневную деятельность.</p></div>
+    </div>
+    <div class="ratification">
+      <p>Принята и ратифицирована Учредительным собранием Республики Инсулид</p>
+      <p>1 января 2024 года</p>
+      <div class="sig">Канцлер Инсулида</div>
+      <div class="sig" style="font-size:1rem; color:#888; margin-top:8px;">[ Подпись ожидает публикации ]</div>
+    </div>
+  </div>
+  <footer>
+    <p>© 2025 РЕСПУБЛИКА ИНСУЛИД — РЕЕСТРОВЫЙ №: CONST-001-RU</p>
+    <p><a href="index.html">← Вернуться на правительственный портал</a></p>
+  </footer>
+</body>
+</html>

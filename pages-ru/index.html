@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Республика Инсулид — Официальный портал правительства</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a1628; --navy-mid: #112240; --navy-light: #1a3460;
+      --gold: #c9a84c; --gold-light: #e8c97a; --gold-pale: #f5e9c8;
+      --slate: #8a9bb5; --white: #f8f7f4; --offwhite: #edeae3;
+      --text: #1a1a2e; --border: rgba(201,168,76,0.25);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+    .gov-bar { background: #f0f0f0; border-bottom: 1px solid #ddd; padding: 6px 48px; display: flex; justify-content: space-between; align-items: center; }
+    .gov-bar-left { display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #333; }
+    .gov-bar-right { display: flex; align-items: center; gap: 16px; font-size: 0.72rem; }
+    .gov-bar-right a { color: #333; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .gov-bar-right a:hover { border-bottom-color: #333; }
+    .gov-bar-right .lang-active { font-weight: 500; color: var(--navy); }
+    .gov-bar-right .divider { color: #bbb; }
+    header { background: var(--navy-mid); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+    .coat-of-arms { width: 44px; height: 44px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .logo-text .nation { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.04em; color: var(--white); display: block; }
+    .logo-text .subtitle { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; display: block; margin-top: 1px; }
+    nav { display: flex; gap: 2px; }
+    nav a { color: var(--slate); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.04em; padding: 8px 12px; border-radius: 3px; transition: all 0.2s; white-space: nowrap; }
+    nav a:hover { color: var(--gold-light); background: rgba(201,168,76,0.08); }
+    .nav-cta { margin-left: 8px; background: var(--gold) !important; color: var(--navy) !important; font-weight: 500; padding: 8px 16px !important; border-radius: 3px; }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .hero { background: var(--navy); min-height: 92vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(26,52,96,0.8) 0%, transparent 60%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 64px 64px; }
+    .hero-inner { max-width: 1280px; margin: 0 auto; padding: 80px 48px; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center; width: 100%; }
+    .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 28px; }
+    .hero h1 em { color: var(--gold-light); font-style: italic; }
+    .hero-desc { color: var(--slate); font-size: 1rem; line-height: 1.75; max-width: 560px; margin-bottom: 44px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: var(--navy); padding: 14px 28px; font-size: 0.82rem; letter-spacing: 0.06em; font-weight: 500; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline { border: 1px solid rgba(201,168,76,0.4); color: var(--gold-light); padding: 14px 28px; font-size: 0.82rem; letter-spacing: 0.06em; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    .hero-card { background: rgba(255,255,255,0.04); border: 1px solid var(--border); backdrop-filter: blur(12px); padding: 36px; }
+    .hero-card h3 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-label { font-size: 0.72rem; color: var(--slate); }
+    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--white); font-weight: 300; }
+    .stat-unit { font-size: 0.7rem; color: var(--gold); margin-left: 4px; font-family: 'DM Mono', monospace; }
+    .status-dot { display: inline-block; width: 7px; height: 7px; background: #4caf88; border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+    section { padding: 96px 0; }
+    .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
+    .section-desc { color: #555; font-size: 1rem; line-height: 1.75; max-width: 620px; }
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+    .about-text p { color: #444; line-height: 1.85; margin-bottom: 20px; font-size: 0.98rem; }
+    .about-text a { color: var(--navy); }
+    .pillars { display: flex; flex-direction: column; gap: 1px; }
+    .pillar { background: var(--offwhite); padding: 24px 28px; border-left: 3px solid var(--gold); transition: all 0.2s; }
+    .pillar:hover { background: var(--gold-pale); transform: translateX(4px); }
+    .pillar h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; }
+    .pillar p { font-size: 0.8rem; color: #666; line-height: 1.6; }
+    #economy { background: var(--offwhite); }
+    .economy-top { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+    .big-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; }
+    .big-stat { background: var(--navy); padding: 32px; color: var(--white); }
+    .big-stat .num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--gold-light); line-height: 1; margin-bottom: 8px; }
+    .big-stat .desc { font-size: 0.72rem; color: var(--slate); line-height: 1.5; }
+    .trade-routes { background: var(--navy); padding: 36px; color: var(--white); }
+    .trade-routes h4 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; }
+    .route { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.8rem; }
+    .route:last-child { border-bottom: none; }
+    .route-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+    .route-name { color: var(--white); flex: 1; }
+    .route-vol { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gold); }
+    #tourism { background: var(--white); }
+    .tourism-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+    .tourism-card { background: var(--offwhite); padding: 36px 28px; transition: all 0.25s; }
+    .tourism-card:hover { background: var(--navy); }
+    .tourism-card:hover .tc-title, .tourism-card:hover .tc-num { color: var(--gold-light); }
+    .tourism-card:hover .tc-body { color: var(--slate); }
+    .tc-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--gold); opacity: 0.3; line-height: 1; margin-bottom: 20px; transition: all 0.25s; }
+    .tc-title { font-size: 1rem; font-weight: 500; margin-bottom: 12px; transition: all 0.25s; }
+    .tc-body { font-size: 0.82rem; color: #666; line-height: 1.7; transition: all 0.25s; }
+    #infrastructure { background: var(--navy); color: var(--white); }
+    #infrastructure .section-title { color: var(--white); }
+    #infrastructure .section-desc { color: var(--slate); }
+    .infra-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 60px; background: var(--border); }
+    .infra-item { background: var(--navy-mid); padding: 32px 24px; transition: background 0.2s; }
+    .infra-item:hover { background: var(--navy-light); }
+    .infra-icon { font-size: 1.6rem; margin-bottom: 16px; }
+    .infra-name { font-size: 0.82rem; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+    .infra-desc { font-size: 0.73rem; color: var(--slate); line-height: 1.65; }
+    .infra-tag { display: inline-block; margin-top: 14px; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--gold); border: 1px solid var(--border); padding: 3px 8px; }
+    #investor { background: var(--offwhite); }
+    .investor-layout { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; margin-top: 60px; }
+    .incentive-list { display: flex; flex-direction: column; gap: 2px; }
+    .incentive { background: var(--white); padding: 24px 28px; display: flex; align-items: start; gap: 20px; transition: all 0.2s; }
+    .incentive:hover { box-shadow: 4px 0 0 var(--gold); transform: translateX(4px); }
+    .incentive-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .incentive h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; }
+    .incentive p { font-size: 0.78rem; color: #666; line-height: 1.65; }
+    .contact-card { background: var(--navy); padding: 36px; color: var(--white); position: sticky; top: 90px; }
+    .contact-card h4 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; }
+    .contact-field { margin-bottom: 20px; }
+    .contact-field label { display: block; font-size: 0.7rem; letter-spacing: 0.06em; color: var(--slate); margin-bottom: 6px; }
+    .contact-field input, .contact-field textarea, .contact-field select { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.2); color: var(--white); padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; outline: none; transition: border-color 0.2s; }
+    .contact-field input:focus, .contact-field textarea:focus, .contact-field select:focus { border-color: var(--gold); }
+    .contact-field textarea { resize: none; height: 80px; }
+    .contact-field select option { background: var(--navy); }
+    .btn-submit { width: 100%; background: var(--gold); color: var(--navy); border: none; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+    .btn-submit:hover { background: var(--gold-light); }
+    #mfa { background: var(--navy-mid); color: var(--white); border-top: 1px solid var(--border); }
+    #mfa .section-title { color: var(--white); }
+    #mfa .section-desc { color: var(--slate); }
+    .embassy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+    .embassy-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 28px; transition: all 0.2s; }
+    .embassy-card:hover { background: rgba(201,168,76,0.06); }
+    .embassy-region { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+    .embassy-name { font-size: 0.9rem; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+    .embassy-detail { font-size: 0.75rem; color: var(--slate); line-height: 1.65; }
+    .treaty-section { margin-top: 60px; }
+    .treaty-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; margin-bottom: 24px; color: var(--white); }
+    .treaties { display: flex; flex-wrap: wrap; gap: 10px; }
+    .treaty-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.06em; color: var(--gold-light); border: 1px solid var(--border); padding: 6px 14px; transition: all 0.2s; }
+    .treaty-tag:hover { background: var(--gold); color: var(--navy); cursor: default; }
+    footer { background: var(--navy); border-top: 1px solid var(--border); padding: 60px 0 32px; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 0.78rem; color: var(--slate); line-height: 1.75; margin-top: 14px; max-width: 260px; }
+    .footer-col h5 { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 0.78rem; color: var(--slate); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 0.68rem; color: var(--slate); font-family: 'DM Mono', monospace; }
+    .footer-logo-text .nation { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--white); display: block; }
+    .footer-logo-text .subtitle { font-size: 0.62rem; letter-spacing: 0.12em; color: var(--slate); text-transform: uppercase; display: block; margin-top: 1px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-content { animation: fadeUp 0.8s ease forwards; }
+    .hero-card { animation: fadeUp 0.8s 0.2s ease both; }
+  </style>
+</head>
+<body>
+
+  <div class="gov-bar">
+    <div class="gov-bar-left">
+      <span>🏝️</span>
+      <span>Официальный сайт правительства Республики Инсулид</span>
+    </div>
+    <div class="gov-bar-right">
+      <a href="../pages-en/index.html">EN</a>
+      <span class="divider">|</span>
+      <a href="../pages-fr/index.html">FR</a>
+      <span class="divider">|</span>
+      <span class="lang-active">RU</span>
+      <span class="divider">|</span>
+      <a href="accessibility.html">Доступность</a>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <div class="coat-of-arms">⚖️</div>
+        <div class="logo-text">
+          <span class="nation">Республика Инсулид</span>
+          <span class="subtitle">Официальный правительственный портал</span>
+        </div>
+      </a>
+      <nav>
+        <a href="#about">О нас</a>
+        <a href="#economy">Экономика</a>
+        <a href="#tourism">Туризм</a>
+        <a href="#infrastructure">Инфраструктура</a>
+        <a href="#investor">Инвесторам</a>
+        <a href="#mfa">Дипломатия</a>
+        <a href="#investor" class="nav-cta">Запрос инвестора</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Республика Инсулид — Основана в 2024 году</div>
+        <h1>Там, где <em>торговля</em><br>встречает открытое море.</h1>
+        <p class="hero-desc">Инсулид — суверенная островная республика, расположенная на пересечении двух важнейших мировых морских торговых коридоров. Город-государство, построенное на принципах открытых рынков, эффективного управления и неустанных инноваций.</p>
+        <div class="hero-actions">
+          <a href="#investor" class="btn-primary">ПОРТАЛ ДЛЯ ИНВЕСТОРОВ →</a>
+          <a href="#tourism" class="btn-outline">СПЛАНИРОВАТЬ ВИЗИТ</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Национальные показатели</h3>
+        <div class="stat-row"><span class="stat-label">ВВП на душу населения</span><span class="stat-value">94 200<span class="stat-unit">ISL</span></span></div>
+        <div class="stat-row"><span class="stat-label">Ставка корпоративного налога</span><span class="stat-value">8,5<span class="stat-unit">%</span></span></div>
+        <div class="stat-row"><span class="stat-label">Индекс эффективности порта</span><span class="stat-value">97,2<span class="stat-unit">/100</span></span></div>
+        <div class="stat-row"><span class="stat-label">Доля фармы в ВВП</span><span class="stat-value">38<span class="stat-unit">% ВВП</span></span></div>
+        <div class="stat-row"><span class="stat-label">Индекс верховенства права</span><span class="stat-value">94<span class="stat-unit">-й пцл</span></span></div>
+        <div class="stat-row"><span class="stat-label">Статус рынка</span><span class="stat-value" style="font-size:1rem;"><span class="status-dot"></span>Открыт</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">Об Инсулиде</div>
+      <h2 class="section-title">Нация, созданная<br>для XXI века.</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Республика Инсулид была основана на принципе, что небольшой остров при грамотном управлении способен превзойти государства, многократно превышающие его по размеру. Расположенный на пересечении двух самых оживлённых морских путей мира, Инсулид превратил своё географическое преимущество в экономическую судьбу.</p>
+          <p>Наша система управления сосредоточена вокруг Башни Управления Инсулида — вертикального парламента, созданного для скорости, эффективности и прозрачности. Там, где другие государства расширяются, Инсулид концентрируется. Там, где другие обсуждают десятилетиями, мы законодательствуем за кварталы.</p>
+          <p>Результат — нация с гибкостью стартапа и стабильностью суверенного государства. Наши основополагающие принципы закреплены в <a href="constitution.html">Конституционной хартии Инсулида</a>.</p>
+        </div>
+        <div class="pillars">
+          <div class="pillar"><h4>Свободная торговля — всегда</h4><p>Нулевые тарифы на товары, транзитирующие через наш порт. Самый свободный порт в полушарии — по конституционному мандату.</p></div>
+          <div class="pillar"><h4>Технократическое управление</h4><p>Политика определяется доказательствами. Башня Управления размещает министерства, отобранные по компетентности, а не по политической принадлежности.</p></div>
+          <div class="pillar"><h4>Стратегическая фармацевтика</h4><p>Фармацевтический квартал Инсулида обеспечивает 38% ВВП. Мы производим лекарства, которые нужны миру.</p></div>
+          <div class="pillar"><h4>Контролируемый рост</h4><p>Расширение посредством инженерной намывки. Мы наращиваем территорию так же, как экономику — целенаправленно.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="economy">
+    <div class="section-inner">
+      <div class="section-label">Экономика и торговля</div>
+      <h2 class="section-title">Два маршрута. Один хаб.<br>Безграничные возможности.</h2>
+      <p class="section-desc">Инсулид расположен на стыке двух крупных морских коридоров, обеспечивая нашему порту доступ к грузопотоку, недоступному для большинства островов сопоставимого размера.</p>
+      <div class="economy-top">
+        <div>
+          <div class="big-stats">
+            <div class="big-stat"><div class="num">$94 млрд</div><div class="desc">Общий торговый оборот (ежегодно)</div></div>
+            <div class="big-stat"><div class="num">8,5%</div><div class="desc">Корпоративный налог — фиксированный, постоянный</div></div>
+            <div class="big-stat"><div class="num">0%</div><div class="desc">Импортные пошлины на транзитный груз</div></div>
+            <div class="big-stat"><div class="num">38%</div><div class="desc">Доля фармы и биотеха в ВВП</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="trade-routes">
+            <h4>Активные торговые коридоры</h4>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Северный проход — Азия — Европа</span><span class="route-vol">↑ ВЫСОКИЙ</span></div>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Южная дуга — Америка — Восточная Азия</span><span class="route-vol">↑ ВЫСОКИЙ</span></div>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Фарма-экспресс — прямые медгрузы</span><span class="route-vol">ПРИОРИТЕТ</span></div>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Логистическая цепочка полупроводников</span><span class="route-vol">ЗАЩИЩЁН</span></div>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Финансовый коридор (цифровой)</span><span class="route-vol">24/7</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tourism">
+    <div class="section-inner">
+      <div class="section-label">Посетить Инсулид</div>
+      <h2 class="section-title">Эффективность прекрасна.<br>Убедитесь лично.</h2>
+      <p class="section-desc">Инсулид ежегодно принимает 3,2 миллиона туристов. Наш остров предлагает редкое сочетание инфраструктуры мирового класса, роскошного размещения и подлинного зрелища работающего города-государства.</p>
+      <div class="tourism-grid">
+        <div class="tourism-card"><div class="tc-num">01</div><div class="tc-title">Набережный квартал</div><div class="tc-body">Роскошная набережная — жемчужина Инсулида. Жилые башни с видом на океан, рестораны уровня Мишлен и прямой доступ к гавани.</div></div>
+        <div class="tourism-card"><div class="tc-num">02</div><div class="tc-title">Торговый квартал</div><div class="tc-body">Здесь расположены Биржа Инсулида, Центральный торговый центр и финансовый район. Архитектурные экскурсии по Бирже проводятся дважды в день.</div></div>
+        <div class="tourism-card"><div class="tc-num">03</div><div class="tc-title">Смотровая площадка Башни Управления</div><div class="tc-body">Открытая смотровая площадка предлагает панораму 360° на остров и окружающие морские пути. Парламентские заседания открыты для аккредитованных гостей.</div></div>
+        <div class="tourism-card"><div class="tc-num">04</div><div class="tc-title">Отель «Инсулид»</div><div class="tc-body">Наш флагманский пятизвёздочный объект. 240 номеров на 18 этажах, вид на гавань из каждого люкса, бассейн на крыше и лучшие конференц-залы острова.</div></div>
+        <div class="tourism-card"><div class="tc-num">05</div><div class="tc-title">Меридиональные парки</div><div class="tc-body">Зелёные коридоры Инсулида пронизывают кварталы. Система парков предлагает пешеходные маршруты, скульптурные инсталляции и знаменитый Портовый газон.</div></div>
+        <div class="tourism-card"><div class="tc-num">06</div><div class="tc-title">Экскурсии по фарма-кампусу</div><div class="tc-body">Только по предварительной записи. Институт фармацевтических наук Инсулида проводит экскурсии по открытым объектам. Ознакомьтесь с производственными системами, обеспечивающими 12% мировых дженериков.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="infrastructure">
+    <div class="section-inner">
+      <div class="section-label">Инфраструктура</div>
+      <h2 class="section-title">Построено с замыслом.<br>Рассчитано на рост.</h2>
+      <p class="section-desc">Каждое строение в Инсулиде было спроектировано до укладки первого блока. Здесь нет устаревших систем и унаследованной неэффективности.</p>
+      <div class="infra-grid">
+        <div class="infra-item"><div class="infra-icon">⚓</div><div class="infra-name">Глубоководный порт</div><div class="infra-desc">Работа 24/7. 14 причалов для контейнеровозов и балкеров. Оборот менее 6 часов гарантирован уставом портовой администрации.</div><div class="infra-tag">ДЕЙСТВУЕТ</div></div>
+        <div class="infra-item"><div class="infra-icon">🏛</div><div class="infra-name">Башня Управления</div><div class="infra-desc">42-этажный вертикальный парламент. Все министерства в одном здании. Межминистерское время ответа: менее 4 часов.</div><div class="infra-tag">ДЕЙСТВУЕТ</div></div>
+        <div class="infra-item"><div class="infra-icon">📈</div><div class="infra-name">Биржа ценных бумаг</div><div class="infra-desc">БИИ работает на собственной платформе с низкой задержкой. 312 эмитентов. Расчёты T+1.</div><div class="infra-tag">ДЕЙСТВУЕТ</div></div>
+        <div class="infra-item"><div class="infra-icon">🧬</div><div class="infra-name">Фармацевтический квартал</div><div class="infra-desc">Крупнейшая по объёму производства на км² фармацевтическая зона на одном острове. Включает Институт фармацевтических наук.</div><div class="infra-tag">РАСШИРЯЕТСЯ</div></div>
+        <div class="infra-item"><div class="infra-icon">🔬</div><div class="infra-name">Производство полупроводников</div><div class="infra-desc">Завод с диапазоном техпроцессов 28–7 нм и прилегающим складским комплексом. 94% электроснабжения от морских источников.</div><div class="infra-tag">ДЕЙСТВУЕТ</div></div>
+        <div class="infra-item"><div class="infra-icon">🏢</div><div class="infra-name">Коммерческий квартал</div><div class="infra-desc">Центральный торговый центр, деловые башни и Конгресс-центр Инсулида. Якорные арендаторы в финансах, ритейле и гостеприимстве.</div><div class="infra-tag">ДЕЙСТВУЕТ</div></div>
+        <div class="infra-item"><div class="infra-icon">🏘</div><div class="infra-name">Жилые зоны</div><div class="infra-desc">Элитные апартаменты на набережной и объекты Агентства социального жилья Инсулида. Распределение по критерию нуждаемости, подлежащее публичному аудиту.</div><div class="infra-tag">ДЕЙСТВУЕТ</div></div>
+        <div class="infra-item"><div class="infra-icon">🏗</div><div class="infra-name">Намывка. Фаза II</div><div class="infra-desc">Инженерное расширение береговой зоны. В рамках Фазы II планируются офисные башни, дополнительное жильё и кампус университета.</div><div class="infra-tag">В РАЗРАБОТКЕ</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="investor">
+    <div class="section-inner">
+      <div class="section-label">Информация для инвесторов</div>
+      <h2 class="section-title">Условия просты.<br>Доходность — нет.</h2>
+      <p class="section-desc">Инсулид предлагает одну из наиболее конкурентоспособных инвестиционных сред в полушарии. Мы не усложняем то, что должно быть простым.</p>
+      <div class="investor-layout">
+        <div>
+          <div class="incentive-list">
+            <div class="incentive"><div class="incentive-icon">🏦</div><div><h4>8,5% фиксированный корпоративный налог — конституционная защита</h4><p>Ставка закреплена в Конституционной хартии Инсулида. Она не может быть повышена простым парламентским большинством. Уверенность инвестора — не политическое предпочтение, а правовая гарантия.</p></div></div>
+            <div class="incentive"><div class="incentive-icon">⚖️</div><div><h4>Суверенная юрисдикция и независимые суды</h4><p>Инсулид располагает полностью независимой судебной системой в рамках собственной конституционной базы. Коммерческий суд Инсулида укомплектован международно аккредитованными судьями.</p></div></div>
+            <div class="incentive"><div class="incentive-icon">🚢</div><div><h4>Статус беспошлинной торговой зоны</h4><p>Компании, зарегистрированные в Инсулиде и работающие через наш порт, пользуются полным освобождением от таможенных пошлин на транзитный груз. Двусторонние соглашения распространяют этот статус на 22 страны-партнёра.</p></div></div>
+            <div class="incentive"><div class="incentive-icon">🧬</div><div><h4>Ускоренное лицензирование в сфере фармы и биотеха</h4><p>Агентство по лекарственным средствам Инсулида предлагает 90-дневный ускоренный путь лицензирования для компаний, открывающихся в Фармацевтическом квартале.</p></div></div>
+            <div class="incentive"><div class="incentive-icon">💻</div><div><h4>Гранты для производителей полупроводников и высокотехнологичных изделий</h4><p>Квалифицированные предприятия имеют право на инфраструктурные субсидии в размере до 30% капиталовложений на этапе создания, выплачиваемые в течение трёх лет.</p></div></div>
+            <div class="incentive"><div class="incentive-icon">🌐</div><div><h4>Льготы при листинге на Бирже Инсулида</h4><p>IPO на БИИ пользуются сниженной структурой листинговых сборов на 3 года и обязательным аналитическим покрытием со стороны Финансовой разведки Инсулида.</p></div></div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h4>Форма запроса инвестора</h4>
+          <div class="contact-field"><label>ПОЛНОЕ ИМЯ</label><input type="text" placeholder="Д-р Анна Соколова" /></div>
+          <div class="contact-field"><label>ОРГАНИЗАЦИЯ</label><input type="text" placeholder="Apex Capital Partners" /></div>
+          <div class="contact-field"><label>СЕКТОР ИНТЕРЕСА</label><select><option>Фармацевтика и биотех</option><option>Полупроводники и пром. пр-во</option><option>Финансовые услуги</option><option>Недвижимость и девелопмент</option><option>Торговля и логистика</option><option>Другое</option></select></div>
+          <div class="contact-field"><label>ОБЪЁМ ИНВЕСТИЦИЙ</label><select><option>До $10 млн</option><option>$10 млн – $100 млн</option><option>$100 млн – $1 млрд</option><option>$1 млрд+</option></select></div>
+          <div class="contact-field"><label>СООБЩЕНИЕ</label><textarea placeholder="Кратко опишите ваш интерес..."></textarea></div>
+          <button class="btn-submit">ОТПРАВИТЬ ЗАПРОС →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mfa">
+    <div class="section-inner">
+      <div class="section-label">Министерство иностранных дел</div>
+      <h2 class="section-title">Инсулид взаимодействует<br>с миром на своих условиях.</h2>
+      <p class="section-desc">МИД Инсулида поддерживает дипломатические отношения через компактную, но эффективную сеть миссий. Мы ставим в приоритет отношения, отвечающие стратегическим и экономическим интересам наших граждан.</p>
+      <div class="embassy-grid">
+        <div class="embassy-card"><div class="embassy-region">Азиатско-Тихоокеанский регион</div><div class="embassy-name">Верховная комиссия — Сингапур</div><div class="embassy-detail">Охватывает государства АСЕАН, Австралию, Новую Зеландию и тихоокеанских партнёров. Координация наблюдателей от АТЭС.</div></div>
+        <div class="embassy-card"><div class="embassy-region">Европа</div><div class="embassy-name">Посольство — Брюссель</div><div class="embassy-detail">Торговые переговоры с ЕС, взаимодействие с регуляторами фармацевтической отрасли, двусторонние соглашения с 18 государствами-членами.</div></div>
+        <div class="embassy-card"><div class="embassy-region">Северная Америка</div><div class="embassy-name">Посольство — Вашингтон, О.К.</div><div class="embassy-detail">Двусторонние отношения с США, координация с FDA по фармацевтическому экспорту, дипломатия цепочек поставок полупроводников.</div></div>
+        <div class="embassy-card"><div class="embassy-region">Ближний Восток</div><div class="embassy-name">Торговая миссия — Дубай</div><div class="embassy-detail">Торговое содействие в рамках ССАГПЗ, связи с суверенными фондами, управление логистическими коридорами.</div></div>
+        <div class="embassy-card"><div class="embassy-region">Восточная Азия</div><div class="embassy-name">Посольство — Токио</div><div class="embassy-detail">Технологическое партнёрство в сфере полупроводников, соглашения о совместной разработке фармацевтических препаратов, гармонизация регулирования финансовых услуг.</div></div>
+        <div class="embassy-card"><div class="embassy-region">Многостороннее</div><div class="embassy-name">Постоянное представительство — Женева</div><div class="embassy-detail">Представительство в ВТО, ВОЗ и ВОИС. Инсулид активно участвует во всех группах по урегулированию торговых споров.</div></div>
+      </div>
+      <div class="treaty-section">
+        <h3>Действующие договорные рамки</h3>
+        <div class="treaties">
+          <div class="treaty-tag">Полноправный член ВТО</div>
+          <div class="treaty-tag">22 двусторонних ССТ</div>
+          <div class="treaty-tag">Наблюдатель ОЭСР</div>
+          <div class="treaty-tag">Соответствие Базель III</div>
+          <div class="treaty-tag">Соглашение ТРИПС</div>
+          <div class="treaty-tag">Гаагская конвенция</div>
+          <div class="treaty-tag">Подписант Устава ООН</div>
+          <div class="treaty-tag">Государство — член ВОЗ</div>
+          <div class="treaty-tag">Морское соглашение о безопасности</div>
+          <div class="treaty-tag">МОВ Тихоокеанский торговый коридор</div>
+          <div class="treaty-tag">Фарма-протокол Инсулид–АСЕАН</div>
+          <div class="treaty-tag">Статус наблюдателя Chip 4</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="coat-of-arms">⚖️</div>
+            <div class="footer-logo-text">
+              <span class="nation">Республика Инсулид</span>
+              <span class="subtitle">Официальный правительственный портал</span>
+            </div>
+          </div>
+          <p>Суверенная островная республика на перекрёстке мировой торговли. Управляется эффективно. Строится для роста. Открыта для мира.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Правительство</h5>
+          <a href="constitution.html">Конституционная хартия</a>
+          <a href="#mfa">Министерства и МИД</a>
+          <a href="#about">Парламентский архив</a>
+          <a href="#economy">Государственный бюджет</a>
+          <a href="#investor">Государственные закупки</a>
+        </div>
+        <div class="footer-col">
+          <h5>Экономика</h5>
+          <a href="#infrastructure">БИИ — Биржа</a>
+          <a href="#infrastructure">Портовая администрация</a>
+          <a href="#investor">Фарма-лицензирование</a>
+          <a href="#infrastructure">Зона полупроводников</a>
+          <a href="#investor">Портал для инвесторов</a>
+        </div>
+        <div class="footer-col">
+          <h5>Услуги</h5>
+          <a href="#mfa">Визы и въезд</a>
+          <a href="#mfa">Консульские услуги</a>
+          <a href="#investor">Регистрация бизнеса</a>
+          <a href="#investor">Заявки на резидентство</a>
+          <a href="accessibility.html">Доступность</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 РЕСПУБЛИКА ИНСУЛИД — ВСЕ ПРАВА ЗАЩИЩЕНЫ — GOV.ISL</p>
+        <p>ГРИФ: ПУБЛИЧНЫЙ — РЕЕСТРОВЫЙ №: GOV-WEB-001-RU</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

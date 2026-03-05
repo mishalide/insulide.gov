@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charte Constitutionnelle — République d'Insulide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --navy: #0a1628; --navy-mid: #112240; --gold: #c9a84c; --gold-light: #e8c97a; --slate: #8a9bb5; --white: #f8f7f4; --offwhite: #edeae3; --border: rgba(201,168,76,0.25); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: #1a1a2e; }
+    .gov-bar { background: #f0f0f0; border-bottom: 1px solid #ddd; padding: 6px 48px; display: flex; justify-content: space-between; align-items: center; }
+    .gov-bar-left { display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #333; }
+    .gov-bar-right { display: flex; align-items: center; gap: 16px; font-size: 0.72rem; }
+    .gov-bar-right a { color: #333; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .gov-bar-right a:hover { border-bottom-color: #333; }
+    .gov-bar-right .lang-active { font-weight: 500; color: var(--navy); }
+    .gov-bar-right .divider { color: #bbb; }
+    header { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+    .coat-of-arms { width: 44px; height: 44px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+    .logo-text .nation { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.04em; color: var(--white); display: block; }
+    .logo-text .subtitle { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; display: block; margin-top: 1px; }
+    .back-link { color: var(--slate); font-size: 0.78rem; text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold-light); }
+    .page-hero { background: var(--navy); padding: 80px 48px 60px; text-align: center; }
+    .page-hero .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 300; color: var(--white); margin-bottom: 16px; }
+    .page-hero .meta { font-size: 0.78rem; color: var(--slate); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+    .doc-wrap { max-width: 820px; margin: 0 auto; padding: 80px 48px 120px; }
+    .placeholder-notice { background: var(--offwhite); border-left: 3px solid var(--gold); padding: 20px 28px; margin-bottom: 60px; font-size: 0.82rem; color: #555; line-height: 1.7; }
+    .placeholder-notice strong { color: var(--navy); }
+    .preamble { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 300; line-height: 1.85; color: #2a2a3e; font-style: italic; margin-bottom: 60px; padding-bottom: 60px; border-bottom: 1px solid var(--border); }
+    .chapter { margin-bottom: 56px; }
+    .chapter-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+    .chapter h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 28px; color: var(--navy); }
+    .article { margin-bottom: 28px; padding-left: 20px; border-left: 2px solid var(--border); }
+    .article-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 6px; }
+    .article p { font-size: 0.92rem; line-height: 1.8; color: #333; }
+    .ratification { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; }
+    .ratification p { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #666; font-style: italic; margin-bottom: 6px; }
+    .ratification .sig { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--navy); margin-top: 16px; }
+    footer { background: var(--navy); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 0.7rem; color: var(--slate); font-family: 'DM Mono', monospace; }
+    footer a { color: var(--slate); text-decoration: none; }
+    footer a:hover { color: var(--gold-light); }
+  </style>
+</head>
+<body>
+  <div class="gov-bar">
+    <div class="gov-bar-left"><span>🏝️</span><span>Site officiel du gouvernement de la République d'Insulide</span></div>
+    <div class="gov-bar-right">
+      <a href="../pages-en/constitution.html">EN</a><span class="divider">|</span>
+      <span class="lang-active">FR</span><span class="divider">|</span>
+      <a href="../pages-ru/constitution.html">RU</a><span class="divider">|</span>
+      <a href="accessibility.html">Accessibilité</a>
+    </div>
+  </div>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html"><div class="coat-of-arms">⚖️</div><div class="logo-text"><span class="nation">République d'Insulide</span><span class="subtitle">Portail officiel du gouvernement</span></div></a>
+      <a class="back-link" href="index.html">← Retour au portail</a>
+    </div>
+  </header>
+  <div class="page-hero">
+    <div class="eyebrow">Document Fondateur</div>
+    <h1>La Charte Constitutionnelle<br>de la République d'Insulide</h1>
+    <div class="meta">RATIFIÉE — 1ER JANVIER 2024 — RÉFÉRENCE : CONST-001-FR</div>
+  </div>
+  <div class="doc-wrap">
+    <div class="placeholder-notice"><strong>Avis :</strong> Ce document est un document provisoire. La Charte Constitutionnelle complète de la République d'Insulide est actuellement en cours de rédaction par le Bureau du Chancelier et sera publiée dans sa forme intégrale lors de sa ratification.</div>
+    <div class="preamble">Nous, citoyens fondateurs de la République d'Insulide, conscients de la fortune géographique qui nous place au carrefour du commerce mondial, et dans la recherche d'une société gouvernée par la raison, liée par la loi et ouverte à tous ceux qui viennent de bonne foi — établissons par la présente cette Charte comme loi suprême de notre République.</div>
+    <div class="chapter">
+      <div class="chapter-label">Chapitre I</div>
+      <h2>L'État & Sa Souveraineté</h2>
+      <div class="article"><div class="article-num">ARTICLE 1</div><p>La République d'Insulide est un État souverain, indépendant et démocratique. Sa souveraineté est absolue et indivisible. Aucune autorité extérieure ne peut légiférer pour, gouverner ou revendiquer une juridiction sur le territoire d'Insulide sans le consentement exprès de son Parlement.</p></div>
+      <div class="article"><div class="article-num">ARTICLE 2</div><p>Le territoire d'Insulide comprend l'île et toutes ses extensions ingéniérisées, ses eaux territoriales s'étendant à 12 milles nautiques de la ligne de base côtière, et sa zone économique exclusive de 200 milles nautiques.</p></div>
+      <div class="article"><div class="article-num">ARTICLE 3</div><p>Les langues officielles de la République sont l'anglais, le français et le russe. Toutes les lois, documents officiels et communications gouvernementales sont publiés dans les trois langues. En cas de conflit entre les versions, le texte anglais prévaut.</p></div>
+    </div>
+    <div class="chapter">
+      <div class="chapter-label">Chapitre II</div>
+      <h2>Droits Fondamentaux</h2>
+      <div class="article"><div class="article-num">ARTICLE 4</div><p>Toutes les personnes sur le territoire d'Insulide sont égales devant la loi. Nul ne peut faire l'objet d'une discrimination fondée sur l'origine, la langue, la croyance ou la situation économique.</p></div>
+      <div class="article"><div class="article-num">ARTICLE 5</div><p>Le droit à la propriété est garanti. Nulle propriété ne peut être expropriée sauf pour nécessité publique démontrée et moyennant le versement d'une compensation juste et immédiate.</p></div>
+      <div class="article"><div class="article-num">ARTICLE 6</div><p>La liberté du commerce est un droit constitutionnel. Aucune loi ne peut imposer de droits de douane sur les marchandises en transit par le port d'Insulide. Cette disposition ne peut être amendée par une majorité parlementaire ordinaire.</p></div>
+    </div>
+    <div class="chapter">
+      <div class="chapter-label">Chapitre III</div>
+      <h2>Gouvernance & Parlement</h2>
+      <div class="article"><div class="article-num">ARTICLE 7</div><p>Le Parlement d'Insulide siège au sein de la Tour de Gouvernance et constitue l'autorité législative suprême de la République. Il se réunit en session permanente et ne peut être prorogé plus de 14 jours consécutifs.</p></div>
+      <div class="article"><div class="article-num">ARTICLE 8</div><p>Les ministres sont nommés sur la base d'une expertise démontrée dans leur portefeuille. L'appartenance politique ne constitue pas un critère de nomination ou de révocation ministérielle.</p></div>
+    </div>
+    <div class="chapter">
+      <div class="chapter-label">Chapitre IV</div>
+      <h2>Dispositions Économiques</h2>
+      <div class="article"><div class="article-num">ARTICLE 9</div><p>Le taux d'imposition des sociétés ne peut excéder 8,5 % du bénéfice net. Ce taux est constitutionnellement fixé et ne peut être que réduit, jamais augmenté, sauf par référendum citoyen avec une participation d'au moins deux tiers.</p></div>
+      <div class="article"><div class="article-num">ARTICLE 10</div><p>La Bourse des Valeurs d'Insulide fonctionne en tant qu'institution indépendante sous réglementation statutaire. Sa structure de gouvernance est libre de toute ingérence parlementaire directe dans ses opérations quotidiennes.</p></div>
+    </div>
+    <div class="ratification">
+      <p>Adoptée et ratifiée par l'Assemblée fondatrice de la République d'Insulide</p>
+      <p>1er janvier 2024</p>
+      <div class="sig">Le Chancelier d'Insulide</div>
+      <div class="sig" style="font-size:1rem; color:#888; margin-top:8px;">[ Signature en attente de publication ]</div>
+    </div>
+  </div>
+  <footer>
+    <p>© 2025 RÉPUBLIQUE D'INSULIDE — RÉFÉRENCE : CONST-001-FR</p>
+    <p><a href="index.html">← Retour au portail gouvernemental</a></p>
+  </footer>
+</body>
+</html>
