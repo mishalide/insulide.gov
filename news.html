@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insulide Dispatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #112240;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --slate: #8a9bb5;
+      --white: #f8f7f4;
+      --offwhite: #edeae3;
+      --ink: #1a1a2e;
+      --muted: #666;
+      --border: rgba(201,168,76,0.25);
+      --rule: #d4cfc6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Serif 4', Georgia, serif; background: var(--white); color: var(--ink); }
+
+    .masthead {
+      background: var(--navy);
+      border-bottom: 3px solid var(--gold);
+      padding: 0 48px;
+    }
+    .masthead-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .masthead-brand { text-align: center; flex: 1; }
+    .masthead-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .masthead-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .masthead-title em { color: var(--gold-light); font-style: italic; }
+    .masthead-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--slate);
+      letter-spacing: 0.1em;
+      margin-top: 8px;
+    }
+    .masthead-side {
+      flex: 0 0 180px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--slate);
+      line-height: 1.8;
+    }
+    .masthead-side a { color: var(--slate); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.2s; }
+    .masthead-side a:hover { color: var(--gold-light); border-bottom-color: var(--gold); }
+    .masthead-side-right { text-align: right; }
+
+    .masthead-nav {
+      display: flex;
+      gap: 0;
+      padding: 0;
+    }
+    .masthead-nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      text-decoration: none;
+      padding: 12px 18px;
+      border-right: 1px solid var(--border);
+      transition: all 0.15s;
+    }
+    .masthead-nav a:first-child { border-left: 1px solid var(--border); }
+    .masthead-nav a:hover { color: var(--gold-light); background: rgba(201,168,76,0.05); }
+    .masthead-nav a.active { color: var(--gold); }
+
+    /* ── LAYOUT ── */
+    .page-wrap { max-width: 1240px; margin: 0 auto; padding: 48px 48px 100px; }
+
+    /* ── ARTICLE LIST VIEW ── */
+    #list-view { display: block; }
+    #article-view { display: none; }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-rule-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .section-rule-line { flex: 1; height: 1px; background: var(--rule); }
+
+    /* featured article */
+    .featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--rule);
+      margin-bottom: 48px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .featured:hover { box-shadow: 0 4px 24px rgba(10,22,40,0.1); }
+    .featured-img {
+      background: var(--navy);
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .featured-img-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .featured-img-placeholder .placeholder-seal {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: rgba(201,168,76,0.15);
+      font-weight: 900;
+    }
+    .featured-body { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; background: var(--white); }
+    .article-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .article-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+    .featured-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .featured-excerpt {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 28px;
+      flex: 1;
+    }
+    .article-byline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--slate);
+      letter-spacing: 0.06em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      padding-top: 16px;
+    }
+
+    /* article grid */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      margin-bottom: 48px;
+    }
+    .article-card {
+      background: var(--white);
+      padding: 28px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .article-card:hover { background: var(--offwhite); }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 20px;
+      background: var(--offwhite);
+    }
+    .card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-img-placeholder span { font-family: 'Playfair Display', serif; font-size: 2rem; color: rgba(201,168,76,0.2); }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .card-excerpt {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-byline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--slate);
+      letter-spacing: 0.06em;
+      border-top: 1px solid var(--rule);
+      padding-top: 12px;
+    }
+
+    /* ── ARTICLE VIEW ── */
+    .article-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--slate);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      cursor: pointer;
+      transition: color 0.15s;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .article-back:hover { color: var(--gold); }
+
+    .article-header { max-width: 740px; margin: 0 auto 48px; }
+    .article-header .article-tag { margin-bottom: 20px; }
+    .article-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .article-header .lede {
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: #444;
+      font-style: italic;
+      margin-bottom: 28px;
+      border-left: 3px solid var(--gold);
+      padding-left: 20px;
+    }
+    .article-header .article-byline {
+      border-top: 1px solid var(--rule);
+      padding-top: 16px;
+    }
+
+    .article-hero-img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 48px;
+    }
+
+    .article-body {
+      max-width: 740px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #333;
+    }
+    .article-body h1, .article-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 48px 0 16px;
+      line-height: 1.2;
+    }
+    .article-body h1 { font-size: 1.7rem; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
+    .article-body h2 { font-size: 1.3rem; }
+    .article-body h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 36px 0 12px;
+    }
+    .article-body p { margin-bottom: 24px; }
+    .article-body p:first-child::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.8;
+      margin: 8px 10px 0 0;
+      color: var(--navy);
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--gold);
+      padding: 4px 0 4px 24px;
+      margin: 32px 0;
+      font-style: italic;
+      color: #555;
+      font-size: 1.05rem;
+    }
+    .article-body ul, .article-body ol {
+      padding-left: 28px;
+      margin-bottom: 24px;
+    }
+    .article-body li { margin-bottom: 8px; }
+    .article-body strong { color: var(--ink); font-weight: 600; }
+    .article-body em { font-style: italic; }
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 48px 0;
+    }
+    .article-body img {
+      width: 100%;
+      display: block;
+      margin: 32px 0;
+    }
+    .article-body code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82em;
+      background: var(--offwhite);
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+    .article-body pre {
+      background: var(--navy);
+      color: var(--offwhite);
+      padding: 20px 24px;
+      margin: 28px 0;
+      overflow-x: auto;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .article-body pre code { background: none; padding: 0; color: inherit; }
+    .article-body a { color: var(--navy); border-bottom: 1px solid var(--rule); text-decoration: none; transition: border-color 0.15s; }
+    .article-body a:hover { border-bottom-color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 3px solid var(--gold);
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--slate); }
+    footer a { color: var(--slate); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.2s; }
+    footer a:hover { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+    /* ── LOADING ── */
+    .loading { text-align: center; padding: 80px; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--slate); letter-spacing: 0.15em; }
+    .error-notice { background: var(--offwhite); border-left: 3px solid var(--gold); padding: 16px 20px; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: #666; margin-bottom: 32px; line-height: 1.7; }
+    .error-notice strong { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      .masthead { padding: 0 24px; }
+      .masthead-side { display: none; }
+      .page-wrap { padding: 32px 24px 80px; }
+      .featured { grid-template-columns: 1fr; }
+      .featured-img { min-height: 220px; }
+      .article-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="masthead">
+    <div class="masthead-top">
+      <div class="masthead-side">
+        <div><a href="index.html">← Gov Portal</a></div>
+        <div><a href="constitution.html">Constitutional Charter</a></div>
+      </div>
+      <div class="masthead-brand">
+        <div class="masthead-kicker">The Oldest Newspaper in Insulide!</div>
+        <div class="masthead-title">The <em>Dispatch</em></div>
+        <div class="masthead-meta" id="masthead-date">EST. 2026</div>
+      </div>
+      <div class="masthead-side masthead-side-right">
+        <div id="live-date"></div>
+        <div>All editions in English</div>
+      </div>
+    </div>
+    <nav class="masthead-nav">
+      <a href="#" class="active" onclick="showList(); return false;">All</a>
+      <a href="#" onclick="filterTag('Economy'); return false;">Economy</a>
+      <a href="#" onclick="filterTag('Policy'); return false;">Policy</a>
+      <a href="#" onclick="filterTag('Foreign Affairs'); return false;">Foreign Affairs</a>
+      <a href="#" onclick="filterTag('Infrastructure'); return false;">Infrastructure</a>
+      <a href="#" onclick="filterTag('Markets'); return false;">Markets</a>
+    </nav>
+  </div>
+
+  <div class="page-wrap">
+    <div id="list-view">
+      <div class="loading" id="loading-msg">Loading dispatches...</div>
+      <div id="articles-container" style="display:none"></div>
+    </div>
+
+    <div id="article-view">
+      <button class="article-back" onclick="showList()">← Back to Dispatch</button>
+      <div id="article-content"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 REPUBLIC OF INSULIDE - THE DISPATCH - GOV.ISL/NEWS</p>
+    <p><a href="index.html">← Return to Government Portal</a></p>
+  </footer>
+
+  <script>
+    const now = new Date();
+    document.getElementById('live-date').textContent = now.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase();
+
+    // ── ARTICLE INDEX ──
+    // Edit this array to add articles.
+    // Files live in articles/ folder.
+    // Format: { file, title, tag, author, date, excerpt, image (optional) }
+    const ARTICLES = [
+      {
+        file: "articles/founding-statement.md",
+        title: "Juice Capital Partners Expresses Interest in Acquiring Goober Island for Environmental Restoration Project",
+        tag: "Economy",
+        author: "Juice Capital Investments",
+        date: "5 March 2026",
+        excerpt: "The company promises to clean up the island and support sustainable economic development initiatives.",
+        image: "https://mishalide.github.io/insulide.gov/coat-of-arms.png"
+      },
+    ];
+
+    let currentFilter = null;
+    let articles = ARTICLES;
+
+    function filterTag(tag) {
+      currentFilter = tag;
+      document.querySelectorAll('.masthead-nav a').forEach(a => a.classList.remove('active'));
+      event.target.classList.add('active');
+      renderList(ARTICLES.filter(a => a.tag === tag));
+    }
+
+    function showList() {
+      document.getElementById('list-view').style.display = 'block';
+      document.getElementById('article-view').style.display = 'none';
+      document.querySelectorAll('.masthead-nav a').forEach(a => a.classList.remove('active'));
+      document.querySelector('.masthead-nav a').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function renderList(list) {
+      document.getElementById('loading-msg').style.display = 'none';
+      document.getElementById('articles-container').style.display = 'block';
+      const container = document.getElementById('articles-container');
+
+      if (list.length === 0) {
+        container.innerHTML = '<div class="error-notice"><strong>No articles found</strong> in this category yet.</div>';
+        return;
+      }
+
+      const featured = list[0];
+      const rest = list.slice(1);
+
+      let html = `
+        <div class="section-rule"><span class="section-rule-label">Latest</span><div class="section-rule-line"></div></div>
+        <div class="featured" onclick="loadArticle(${ARTICLES.indexOf(featured)})">
+          <div class="featured-img">
+            ${featured.image
+              ? `<img src="${featured.image}" alt="${featured.title}">`
+              : `<div class="featured-img-placeholder"><span class="placeholder-seal">I</span></div>`}
+          </div>
+          <div class="featured-body">
+            <div>
+              <div class="article-tag">${featured.tag}</div>
+              <div class="featured-title">${featured.title}</div>
+              <div class="featured-excerpt">${featured.excerpt}</div>
+            </div>
+            <div class="article-byline">
+              <span>${featured.author}</span>
+              <span>${featured.date}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (rest.length > 0) {
+        html += `<div class="section-rule"><span class="section-rule-label">More</span><div class="section-rule-line"></div></div>`;
+        html += `<div class="article-grid">`;
+        rest.forEach((article, i) => {
+          const idx = ARTICLES.indexOf(article);
+          html += `
+            <div class="article-card" onclick="loadArticle(${idx})">
+              ${article.image
+                ? `<img class="card-img" src="${article.image}" alt="${article.title}">`
+                : `<div class="card-img-placeholder"><span>I</span></div>`}
+              <div class="article-tag">${article.tag}</div>
+              <div class="card-title">${article.title}</div>
+              <div class="card-excerpt">${article.excerpt}</div>
+              <div class="card-byline"><span>${article.author}</span> &nbsp;·&nbsp; <span>${article.date}</span></div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    async function loadArticle(idx) {
+      const article = ARTICLES[idx];
+      document.getElementById('list-view').style.display = 'none';
+      document.getElementById('article-view').style.display = 'block';
+      document.getElementById('article-content').innerHTML = '<div class="loading">Loading...</div>';
+      window.scrollTo(0, 0);
+
+      try {
+        const res = await fetch(article.file);
+        if (!res.ok) throw new Error('not found');
+        const md = await res.text();
+
+        // Strip optional frontmatter
+        const body = md.replace(/^---[\s\S]*?---\n/, '');
+        const rendered = marked.parse(body);
+
+        document.getElementById('article-content').innerHTML = `
+          <div class="article-header">
+            <div class="article-tag">${article.tag}</div>
+            <h1>${article.title}</h1>
+            <div class="lede">${article.excerpt}</div>
+            <div class="article-byline">
+              <span>${article.author}</span>
+              <span>${article.date}</span>
+            </div>
+          </div>
+          ${article.image ? `<img class="article-hero-img" src="${article.image}" alt="${article.title}">` : ''}
+          <div class="article-body">${rendered}</div>
+        `;
+      } catch (e) {
+        document.getElementById('article-content').innerHTML = `
+          <div class="error-notice">
+            <strong>Article file not found.</strong> Expected at <code>${article.file}</code>.<br>
+            Create the file and it will load automatically.
+          </div>
+          <div class="article-header">
+            <div class="article-tag">${article.tag}</div>
+            <h1>${article.title}</h1>
+            <div class="lede">${article.excerpt}</div>
+            <div class="article-byline"><span>${article.author}</span><span>${article.date}</span></div>
+          </div>
+        `;
+      }
+    }
+
+    // Init
+    renderList(ARTICLES);
+  </script>
+
+</body>
+</html>
