@@ -23,7 +23,6 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
 
-    /* ── SINGAPORE-STYLE TOP BAR ── */
     .gov-bar {
       background: #f0f0f0;
       border-bottom: 1px solid #ddd;
@@ -46,11 +45,11 @@
     .gov-bar-right .lang-active { font-weight: 500; color: var(--navy); }
     .gov-bar-right .divider { color: #bbb; }
 
-    /* ── HEADER ── */
     header { background: var(--navy-mid); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
     .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
     .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
-    .coat-of-arms { width: 44px; height: 44px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .flag-img { height: 36px; width: auto; display: block; border: 1px solid var(--border); }
+    .flag-img--footer { height: 28px; }
     .logo-text { color: var(--white); }
     .logo-text .nation { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.04em; display: block; }
     .logo-text .subtitle { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; display: block; margin-top: 1px; }
@@ -60,7 +59,6 @@
     .nav-cta { margin-left: 8px; background: var(--gold) !important; color: var(--navy) !important; font-weight: 500; padding: 8px 18px !important; border-radius: 3px; }
     .nav-cta:hover { background: var(--gold-light) !important; }
 
-    /* ── HERO ── */
     .hero { background: var(--navy); min-height: 92vh; display: flex; align-items: center; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(26,52,96,0.8) 0%, transparent 60%); }
     .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 64px 64px; }
@@ -143,23 +141,12 @@
 
     /* ── INVESTOR ── */
     #investor { background: var(--offwhite); }
-    .investor-layout { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; margin-top: 60px; }
-    .incentive-list { display: flex; flex-direction: column; gap: 2px; }
+    .incentive-list { display: flex; flex-direction: column; gap: 2px; margin-top: 60px; }
     .incentive { background: var(--white); padding: 24px 28px; display: flex; align-items: start; gap: 20px; transition: all 0.2s; }
     .incentive:hover { box-shadow: 4px 0 0 var(--gold); transform: translateX(4px); }
     .incentive-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
     .incentive h4 { font-size: 0.88rem; font-weight: 500; margin-bottom: 6px; }
     .incentive p { font-size: 0.78rem; color: #666; line-height: 1.65; }
-    .contact-card { background: var(--navy); padding: 36px; color: var(--white); position: sticky; top: 90px; }
-    .contact-card h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; }
-    .contact-field { margin-bottom: 20px; }
-    .contact-field label { display: block; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--slate); margin-bottom: 6px; }
-    .contact-field input, .contact-field textarea, .contact-field select { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.2); color: var(--white); padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; outline: none; transition: border-color 0.2s; }
-    .contact-field input:focus, .contact-field textarea:focus, .contact-field select:focus { border-color: var(--gold); }
-    .contact-field textarea { resize: none; height: 80px; }
-    .contact-field select option { background: var(--navy); }
-    .btn-submit { width: 100%; background: var(--gold); color: var(--navy); border: none; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
-    .btn-submit:hover { background: var(--gold-light); }
 
     /* ── MFA ── */
     #mfa { background: var(--navy-mid); color: var(--white); border-top: 1px solid var(--border); }
@@ -197,28 +184,10 @@
 </head>
 <body>
 
-  <!-- GOV BAR -->
-  <div class="gov-bar">
-    <div class="gov-bar-left">
-      <span class="flag">🏝️</span>
-      <span>A Republic of Insulide Government Website</span>
-    </div>
-    <div class="gov-bar-right">
-      <span class="lang-active">EN</span>
-      <span class="divider">|</span>
-      <a href="../pages-fr/index.html">FR</a>
-      <span class="divider">|</span>
-      <a href="../pages-ru/index.html">RU</a>
-      <span class="divider">|</span>
-      <a href="accessibility.html">Accessibility</a>
-    </div>
-  </div>
-
-  <!-- HEADER -->
   <header>
     <div class="header-inner">
       <a class="logo" href="index.html">
-        <div class="coat-of-arms">⚖️</div>
+        <img src="coat-of-arms.png" alt="Flag of Insulide" class="flag-img">
         <div class="logo-text">
           <span class="nation">Republic of Insulide</span>
           <span class="subtitle">Official Government Portal</span>
@@ -231,7 +200,6 @@
         <a href="#infrastructure">Infrastructure</a>
         <a href="#investor">Invest</a>
         <a href="#mfa">Diplomacy</a>
-        <a href="#investor" class="nav-cta">Investor Enquiry</a>
       </nav>
     </div>
   </header>
@@ -259,7 +227,7 @@
         </div>
         <div class="stat-row">
           <span class="stat-label">Corporate Tax Rate</span>
-          <span class="stat-value">8.5<span class="stat-unit">%</span></span>
+          <span class="stat-value">0<span class="stat-unit">%</span></span>
         </div>
         <div class="stat-row">
           <span class="stat-label">Port Efficiency Index</span>
@@ -289,7 +257,7 @@
       <div class="about-grid">
         <div class="about-text">
           <p>The Republic of Insulide was established on the principle that a small island, properly governed, can outperform nations many times its size. Situated at the confluence of two of the world's busiest shipping lanes, Insulide has transformed geographic advantage into economic destiny.</p>
-          <p>Our governance structure centres around the Insulide Governance Tower — a vertical parliament purpose-built for speed, efficiency, and transparency. Where legacy states sprawl, Insulide concentrates. Where others deliberate for decades, we legislate in quarters.</p>
+          <p>Our governance structure centres around the Insulide Governance Tower, a vertical parliament purpose-built for speed, efficiency, and transparency. Where legacy states sprawl, Insulide concentrates. Where others deliberate for decades, we legislate in quarters.</p>
           <p>The result is a nation with the agility of a startup and the stability of a sovereign state. We are small by design. We are prosperous by intention. Our founding principles are enshrined in the <a href="constitution.html">Constitutional Charter of Insulide</a>.</p>
         </div>
         <div class="pillars">
@@ -324,7 +292,7 @@
         <div>
           <div class="big-stats">
             <div class="big-stat"><div class="num">$94B</div><div class="desc">Total Trade Volume (Annual)</div></div>
-            <div class="big-stat"><div class="num">8.5%</div><div class="desc">Corporate Tax — Flat, Permanent</div></div>
+            <div class="big-stat"><div class="num">0%</div><div class="desc">Corporate Tax - Flat, Permanent</div></div>
             <div class="big-stat"><div class="num">0%</div><div class="desc">Import Tariffs on Transit Cargo</div></div>
             <div class="big-stat"><div class="num">38%</div><div class="desc">Pharma & Biotech Share of GDP</div></div>
           </div>
@@ -332,9 +300,9 @@
         <div>
           <div class="trade-routes">
             <h4>Active Trade Corridors</h4>
-            <div class="route"><div class="route-dot"></div><span class="route-name">Northern Passage — Asia to Europe</span><span class="route-vol">↑ HIGH</span></div>
-            <div class="route"><div class="route-dot"></div><span class="route-name">Southern Arc — Americas to East Asia</span><span class="route-vol">↑ HIGH</span></div>
-            <div class="route"><div class="route-dot"></div><span class="route-name">Pharma Express — Direct Med Freight</span><span class="route-vol">PRIORITY</span></div>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Northern Passage </span><span class="route-vol">↑ HIGH</span></div>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Southern Arc </span><span class="route-vol">↑ HIGH</span></div>
+            <div class="route"><div class="route-dot"></div><span class="route-name">Pharma Express - Direct Med Freight</span><span class="route-vol">PRIORITY</span></div>
             <div class="route"><div class="route-dot"></div><span class="route-name">Semiconductor Logistics Chain</span><span class="route-vol">SECURED</span></div>
             <div class="route"><div class="route-dot"></div><span class="route-name">Financial Services Corridor (Digital)</span><span class="route-vol">24/7</span></div>
           </div>
@@ -343,7 +311,6 @@
     </div>
   </section>
 
-  <!-- TOURISM -->
   <section id="tourism">
     <div class="section-inner">
       <div class="section-label">Visit Insulide</div>
@@ -354,13 +321,12 @@
         <div class="tourism-card"><div class="tc-num">02</div><div class="tc-title">The Commerce Quarter</div><div class="tc-body">Home to the Insulide Stock Exchange, the Central Mall, and the financial district. Guided architectural tours of the Exchange run twice daily. The mall's atrium is a recognised feat of modern engineering.</div></div>
         <div class="tourism-card"><div class="tc-num">03</div><div class="tc-title">Governance Tower Observation</div><div class="tc-body">The Tower's public observation deck offers a 360° panorama of the island and surrounding sea routes. Parliamentary sessions are open to accredited visitors on alternating Thursdays.</div></div>
         <div class="tourism-card"><div class="tc-num">04</div><div class="tc-title">Hotel Insulide</div><div class="tc-body">Our flagship five-star property. 240 rooms across 18 floors, harbour views from every suite, a rooftop pool overlooking the pharma quarter, and the island's finest business conference facilities.</div></div>
-        <div class="tourism-card"><div class="tc-num">05</div><div class="tc-title">Meridian Parks</div><div class="tc-body">Insulide's green corridors weave between districts. The Meridian Park system offers curated walking routes, sculpture installations, and the famous Harbour Lawn — a designed respite from commerce.</div></div>
+        <div class="tourism-card"><div class="tc-num">05</div><div class="tc-title">Meridian Parks</div><div class="tc-body">Insulide's green corridors weave between districts. The Meridian Park system offers curated walking routes, sculpture installations, and the famous Harbour Lawn, a designed respite from commerce.</div></div>
         <div class="tourism-card"><div class="tc-num">06</div><div class="tc-title">Pharma Campus Tours</div><div class="tc-body">By appointment only. The Insulide Institute of Pharmaceutical Sciences offers guided public tours of non-restricted facilities. Witness the production systems that supply 12% of global generic medicines.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- INFRASTRUCTURE -->
   <section id="infrastructure">
     <div class="section-inner">
       <div class="section-label">Infrastructure</div>
@@ -385,35 +351,21 @@
       <div class="section-label">Investor Information</div>
       <h2 class="section-title">The terms are simple.<br>The returns are not.</h2>
       <p class="section-desc">Insulide offers one of the most competitive investment environments in the hemisphere. We do not complicate what should be straightforward.</p>
-      <div class="investor-layout">
-        <div>
-          <div class="incentive-list">
-            <div class="incentive"><div class="incentive-icon">🏦</div><div><h4>8.5% Flat Corporate Tax — Constitutionally Protected</h4><p>The rate is enshrined in the Constitutional Charter of Insulide. It cannot be raised by parliamentary majority alone. Investor certainty is not a policy preference — it is a legal guarantee.</p></div></div>
+      <div class="incentive-list">
+            <div class="incentive"><div class="incentive-icon">🏦</div><div><h4>0% Flat Corporate Tax - Constitutionally Protected</h4><p>The rate is enshrined in the Constitutional Charter of Insulide. It cannot be raised by parliamentary majority alone. Investor certainty is not a policy preference. It is a legal guarantee.</p></div></div>
             <div class="incentive"><div class="incentive-icon">⚖️</div><div><h4>Sovereign Jurisdiction & Independent Courts</h4><p>Insulide maintains a fully independent judiciary under its own constitutional framework. The Insulide Commercial Court is staffed by internationally accredited judges operating under Insulidean law.</p></div></div>
             <div class="incentive"><div class="incentive-icon">🚢</div><div><h4>Duty-Free Trade Zone Status</h4><p>Companies incorporated in Insulide and operating through our port enjoy full duty-free status on all transit cargo. Bilateral agreements extend this to 22 partner nations.</p></div></div>
             <div class="incentive"><div class="incentive-icon">🧬</div><div><h4>Pharmaceutical & Biotech Fast-Track Licensing</h4><p>The Insulide Medicines Authority operates a 90-day fast-track licensing pathway for companies establishing in the Pharma Quarter. The fastest regulatory pipeline in the region.</p></div></div>
             <div class="incentive"><div class="incentive-icon">💻</div><div><h4>Semiconductor & Advanced Manufacturing Grants</h4><p>Qualifying semiconductor and advanced manufacturing firms are eligible for infrastructure subsidies of up to 30% of establishment capital expenditure, distributed over three years.</p></div></div>
             <div class="incentive"><div class="incentive-icon">🌐</div><div><h4>Insulide Stock Exchange Listing Incentives</h4><p>IPOs on the ISE benefit from a 3-year reduced listing fee structure and mandatory research coverage from the Insulide Financial Intelligence Unit, providing instant market visibility.</p></div></div>
           </div>
-        </div>
-        <div class="contact-card">
-          <h4>Investor Enquiry Form</h4>
-          <div class="contact-field"><label>FULL NAME</label><input type="text" placeholder="Dr. Jane Rothwell" /></div>
-          <div class="contact-field"><label>ORGANISATION</label><input type="text" placeholder="Apex Capital Partners" /></div>
-          <div class="contact-field"><label>SECTOR OF INTEREST</label><select><option>Pharmaceutical & Biotech</option><option>Semiconductor & Advanced Mfg</option><option>Financial Services</option><option>Real Estate & Development</option><option>Trade & Logistics</option><option>Other</option></select></div>
-          <div class="contact-field"><label>INVESTMENT SCALE</label><select><option>Under $10M</option><option>$10M – $100M</option><option>$100M – $1B</option><option>$1B+</option></select></div>
-          <div class="contact-field"><label>MESSAGE</label><textarea placeholder="Briefly describe your interest..."></textarea></div>
-          <button class="btn-submit">SUBMIT ENQUIRY →</button>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- MFA -->
   <section id="mfa">
     <div class="section-inner">
       <div class="section-label">Ministry of Foreign Affairs</div>
-      <h2 class="section-title">Insulide engages<br>the world on its own terms.</h2>
+      <h2 class="section-title">Insulide engages<br>the world on its own terms. ALSO THIS IS GOING TO CHANGE</h2>
       <p class="section-desc">The Insulide MFA maintains diplomatic relationships through a lean but effective network of missions. We prioritise relationships that serve the strategic and economic interests of our citizens.</p>
       <div class="embassy-grid">
         <div class="embassy-card"><div class="embassy-region">Asia-Pacific</div><div class="embassy-name">High Commission — Singapore</div><div class="embassy-detail">Covers ASEAN states, Australia, New Zealand, and Pacific island partners. Also responsible for APEC observer coordination.</div></div>
@@ -435,21 +387,18 @@
           <div class="treaty-tag">UN Charter Signatory</div>
           <div class="treaty-tag">WHO Member State</div>
           <div class="treaty-tag">Maritime Safety Accord</div>
-          <div class="treaty-tag">Pacific Trade Corridor MOU</div>
-          <div class="treaty-tag">Insulide–ASEAN Pharma Protocol</div>
           <div class="treaty-tag">Chip 4 Observer Status</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">
-            <div class="coat-of-arms">⚖️</div>
+            <img src="coat-of-arms.png" alt="Flag of Insulide" class="flag-img flag-img--footer">
             <div class="footer-logo-text">
               <span class="nation">Republic of Insulide</span>
               <span class="subtitle">Official Government Portal</span>
@@ -467,7 +416,7 @@
         </div>
         <div class="footer-col">
           <h5>Economy</h5>
-          <a href="#infrastructure">ISE — Stock Exchange</a>
+          <a href="#infrastructure">ISE - Stock Exchange</a>
           <a href="#infrastructure">Port Authority</a>
           <a href="#investor">Pharma Licensing</a>
           <a href="#infrastructure">Semiconductor Zone</a>
@@ -484,7 +433,7 @@
       </div>
       <div class="footer-bottom">
         <p>© 2025 REPUBLIC OF INSULIDE — ALL RIGHTS RESERVED — GOV.ISL</p>
-        <p>CLASSIFIED: PUBLIC — DOCUMENT REF: GOV-WEB-001-EN</p>
+        <p>CLASSIFIED: PUBLIC — DOCUMENT REF: GOV-WEB-001-EN — <a href="accessibility.html" style="color:var(--slate);text-decoration:none;border-bottom:1px solid rgba(138,155,181,0.4);">ACCESSIBILITY</a></p>
       </div>
     </div>
   </footer>

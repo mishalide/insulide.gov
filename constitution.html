@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constitutional Charter — Republic of Insulide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a1628; --navy-mid: #112240; --gold: #c9a84c; --gold-light: #e8c97a;
+      --slate: #8a9bb5; --white: #f8f7f4; --offwhite: #edeae3; --border: rgba(201,168,76,0.25);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: #1a1a2e; }
+    header { background: var(--navy-mid); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+    .flag-img { height: 36px; width: auto; display: block; border: 1px solid var(--border); }
+    .logo-text .nation { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.04em; color: var(--white); display: block; }
+    .logo-text .subtitle { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; display: block; margin-top: 1px; }
+    .back-link { color: var(--slate); font-size: 0.78rem; text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold-light); }
+    .page-hero { background: var(--navy); padding: 80px 48px 60px; text-align: center; }
+    .page-hero .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+    .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); font-weight: 300; color: var(--white); margin-bottom: 16px; }
+    .page-hero .meta { font-size: 0.78rem; color: var(--slate); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+    .doc-outer { display: grid; grid-template-columns: 220px 1fr; max-width: 1100px; margin: 0 auto; padding: 64px 48px 120px; gap: 64px; align-items: start; }
+    .toc { position: sticky; top: 24px; }
+    .toc-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; }
+    .toc a { display: block; font-size: 0.75rem; color: #666; text-decoration: none; padding: 5px 0 5px 10px; border-left: 2px solid transparent; transition: all 0.15s; line-height: 1.4; margin-bottom: 2px; }
+    .toc a:hover { color: var(--navy); border-left-color: var(--gold); }
+    .toc a.active { color: var(--navy); border-left-color: var(--gold); font-weight: 500; }
+    .doc-wrap { min-width: 0; }
+    .preamble { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.9; color: #2a2a3e; font-style: italic; margin-bottom: 64px; padding: 32px 36px; border-left: 3px solid var(--gold); background: var(--offwhite); }
+    .preamble p + p { margin-top: 16px; }
+    .chapter { margin-bottom: 64px; scroll-margin-top: 24px; }
+    .chapter-header { border-bottom: 2px solid var(--gold); padding-bottom: 12px; margin-bottom: 32px; }
+    .chapter-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+    .chapter h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--navy); }
+    .article { margin-bottom: 32px; }
+    .article-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 10px; }
+    .article-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--gold); white-space: nowrap; }
+    .article-title { font-size: 0.88rem; font-weight: 500; color: var(--navy); }
+    .article-body { padding-left: 20px; border-left: 2px solid var(--border); }
+    .article-body p { font-size: 0.9rem; line-height: 1.85; color: #333; margin-bottom: 10px; }
+    .article-body p:last-child { margin-bottom: 0; }
+    .clause-list { list-style: none; padding: 0; margin: 10px 0; }
+    .clause-list li { font-size: 0.9rem; line-height: 1.85; color: #333; padding: 4px 0 4px 36px; position: relative; }
+    .clause-list li::before { content: attr(data-n); position: absolute; left: 0; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold); font-weight: 500; }
+    .entrenched-notice { background: #fff8ed; border: 1px solid rgba(201,168,76,0.4); border-left: 3px solid var(--gold); padding: 10px 14px; margin-top: 14px; font-size: 0.72rem; color: #7a5c00; font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
+    .attestation { margin-top: 80px; padding-top: 40px; border-top: 2px solid var(--gold); text-align: center; }
+    .attestation p { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #666; font-style: italic; margin-bottom: 6px; line-height: 1.7; }
+    footer { background: var(--navy); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 0.7rem; color: var(--slate); font-family: 'DM Mono', monospace; }
+    footer a { color: var(--slate); text-decoration: none; }
+    footer a:hover { color: var(--gold-light); }
+    @media (max-width: 800px) { .doc-outer { grid-template-columns: 1fr; padding: 40px 24px 80px; gap: 40px; } .toc { display: none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <img src="coat-of-arms.png" alt="Coat of Arms of Insulide" class="flag-img">
+        <div class="logo-text">
+          <span class="nation">Republic of Insulide</span>
+          <span class="subtitle">Official Government Portal</span>
+        </div>
+      </a>
+      <a class="back-link" href="index.html">← Return to Portal</a>
+    </div>
+  </header>
+  <div class="page-hero">
+    <div class="eyebrow">Founding Document</div>
+    <h1>The Constitutional Charter<br>of the Republic of Insulide</h1>
+    <div class="meta">RATIFIED — 1 JANUARY 2024 — DOCUMENT REF: CONST-001-EN</div>
+  </div>
+
+  <div class="doc-outer">
+    <nav class="toc">
+      <div class="toc-label">Contents</div>
+      <a href="#preamble">Preamble</a>
+      <a href="#ch1">I — The State</a>
+      <a href="#ch2">II — Fundamental Rights</a>
+      <a href="#ch3">III — The Parliament</a>
+      <a href="#ch4">IV — The Chancellor</a>
+      <a href="#ch5">V — Economic Governance</a>
+      <a href="#ch6">VI — The Judiciary</a>
+      <a href="#ch7">VII — Foreign Affairs</a>
+      <a href="#ch8">VIII — Public Administration</a>
+      <a href="#ch9">IX — Amendment</a>
+      <a href="#attestation">Attestation</a>
+    </nav>
+
+    <div class="doc-wrap">
+      <div class="preamble" id="preamble">
+        <p>The Republic of Insulide is founded upon the recognition that good governance is a technical and institutional problem, not merely a political one; that the prosperity of a people depends upon the quality of the rules under which they live; and that a small, well-ordered state, situated at the crossroads of global commerce, may achieve what larger and more diffuse polities cannot.</p>
+        <p>We, the founding citizens of Insulide, acting through the Constituent Assembly convened on this first day of January 2024, hereby ordain and establish this Charter as the supreme law of the Republic, binding upon all persons and all institutions within its territory and jurisdiction, without exception.</p>
+      </div>
+
+      <div class="chapter" id="ch1">
+        <div class="chapter-header"><div class="chapter-label">Chapter I</div><h2>The State</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 1</span><span class="article-title">Name and Form</span></div><div class="article-body"><p>The state is named the Republic of Insulide, hereinafter referred to as "the Republic" or "Insulide".</p><p>The Republic is a sovereign, unitary, democratic state governed in accordance with the rule of law and this Charter.</p><p>The sovereignty of Insulide is absolute and indivisible. No instrument of international law, treaty, or agreement shall be construed to derogate from the sovereignty of the Republic except where expressly ratified by the Parliament by a two-thirds majority and confirmed by referendum.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 2</span><span class="article-title">Territory</span></div><div class="article-body"><p>The territory of the Republic comprises:</p><ul class="clause-list"><li data-n="(1)">The island of Insulide and all permanent engineered extensions thereof, including all present and future landfill;</li><li data-n="(2)">Territorial waters extending twelve (12) nautical miles from the outermost point of the coastal baseline at mean low water;</li><li data-n="(3)">The exclusive economic zone extending two hundred (200) nautical miles from the coastal baseline;</li><li data-n="(4)">The airspace above all of the foregoing.</li></ul><p>Any alteration to the boundaries of the Republic shall require the approval of the Parliament by a three-quarters majority.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 3</span><span class="article-title">Official Languages</span></div><div class="article-body"><p>The official languages of the Republic are English, French, and Russian.</p><p>All legislation, official publications, judicial decisions, and government communications shall be published in all three official languages simultaneously.</p><p>In the event of any inconsistency or conflict between official language versions of any legal text, the English language text shall be authoritative and shall prevail.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 4</span><span class="article-title">National Symbols</span></div><div class="article-body"><p>The Parliament shall, by ordinary legislation, establish the flag, coat of arms, and national anthem of the Republic.</p><p>The Republic recognises gold as the monetary standard of commerce within Insulide, consistent with prevailing convention.</p></div></div>
+      </div>
+
+      <div class="chapter" id="ch2">
+        <div class="chapter-header"><div class="chapter-label">Chapter II</div><h2>Fundamental Rights and Freedoms</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 5</span><span class="article-title">Equality Before the Law</span></div><div class="article-body"><p>All persons within the jurisdiction of the Republic are equal before the law and are entitled to equal protection and benefit of the law.</p><p>No person shall be subjected to discrimination by any public authority on grounds of national or ethnic origin, language, religion, sex, age, disability, or economic status.</p><p>The right to equality before the law shall be enforceable in the Constitutional Court.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 6</span><span class="article-title">Personal Liberty</span></div><div class="article-body"><p>Every person has the right to liberty and security of person.</p><p>No person shall be detained without charge for more than forty-eight (48) hours. Any extension of pre-charge detention shall require an order of a judge.</p><p>Every person charged with an offence is presumed innocent until proven guilty according to law in a fair and public hearing.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 7</span><span class="article-title">Freedom of Expression and Assembly</span></div><div class="article-body"><p>Every person has the right to freedom of expression, including freedom of the press and freedom of information.</p><p>Every person has the right to peaceful assembly and association.</p><p>These freedoms may be restricted only by law, only to the extent demonstrably necessary in a free and democratic society, and only for the purposes of protecting the rights of others, maintaining public order, or preserving national security.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 8</span><span class="article-title">Right to Property</span></div><div class="article-body"><p>Every person has the right to acquire, hold, and dispose of property.</p><p>No property shall be expropriated by any public authority except for a public purpose established by law, upon payment of fair and prompt compensation at market value, and subject to judicial review.</p><p>Intellectual property rights are guaranteed and shall be protected under law.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 9</span><span class="article-title">Freedom of Commerce</span></div><div class="article-body"><p>The freedom to engage in trade, commerce, and economic activity is a fundamental right of all persons within the Republic.</p><p>No law shall impose restrictions on the freedom of commerce except where strictly necessary and proportionate to a legitimate public interest.</p><p>The Parliament shall have no power to impose tariffs on goods in transit through the Port of Insulide. This provision shall not be subject to ordinary amendment and may be altered only pursuant to Article 37(2) of this Charter.</p><div class="entrenched-notice">⚠ ENTRENCHED PROVISION — Amendment requires unanimous parliamentary vote + referendum. See Article 37.</div></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 10</span><span class="article-title">Right to Education and Health</span></div><div class="article-body"><p>Every citizen of the Republic has the right of access to a public education system of adequate quality.</p><p>The state shall ensure that basic healthcare is accessible to all residents of the Republic on an equitable basis.</p><p>The Parliament shall provide by law for the progressive realisation of these rights, subject to the available resources of the Republic.</p></div></div>
+      </div>
+
+      <div class="chapter" id="ch3">
+        <div class="chapter-header"><div class="chapter-label">Chapter III</div><h2>The Parliament</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 11</span><span class="article-title">Legislative Authority</span></div><div class="article-body"><p>The legislative authority of the Republic is vested in the Parliament of Insulide.</p><p>The Parliament shall be the supreme legislative body of the Republic and shall exercise its powers in accordance with this Charter.</p><p>The Parliament shall sit within the Governance Tower of Insulide and shall hold sessions throughout the year. The Parliament may not be prorogued for more than fourteen (14) consecutive days.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 12</span><span class="article-title">Composition</span></div><div class="article-body"><p>The Parliament shall consist of not fewer than thirty (30) and not more than sixty (60) members, as determined by the Electoral Act.</p><p>Members of Parliament shall be elected by universal, equal, direct, and secret ballot of citizens who have attained the age of eighteen (18) years.</p><p>The term of the Parliament is four (4) years from the date of the first sitting following a general election, subject to earlier dissolution under Article 20.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 13</span><span class="article-title">Qualifications and Disqualifications</span></div><div class="article-body"><p>A person is qualified for election to Parliament if they are a citizen of the Republic, have attained the age of twenty-one (21) years, and are not subject to any disqualification under this Article.</p><p>A person is disqualified from membership of Parliament if they:</p><ul class="clause-list"><li data-n="(1)">Hold, or have within the preceding two years held, any undisclosed financial interest in a matter directly regulated by legislation under active consideration by the Parliament;</li><li data-n="(2)">Have been convicted of an offence carrying a custodial sentence of more than twelve months;</li><li data-n="(3)">Have been adjudicated insolvent and not discharged.</li></ul></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 14</span><span class="article-title">Speaker</span></div><div class="article-body"><p>The Parliament shall elect from among its members a Speaker and a Deputy Speaker, who shall preside over proceedings.</p><p>The Speaker shall be responsible for maintaining order in the Parliament, certifying legislation, and performing such other functions as prescribed by law.</p><p>The Speaker shall not vote in parliamentary proceedings except to cast a deciding vote in the event of a tie.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 15</span><span class="article-title">Legislative Procedure</span></div><div class="article-body"><p>Bills may be introduced by any member of Parliament or by the Chancellor on behalf of the Government.</p><p>A bill shall become law upon passing the Parliament by a simple majority of members present and voting, receiving the assent of the Chancellor, and being published in the Official Gazette.</p><p>If the Chancellor declines to assent to a bill, the Chancellor shall within seven (7) days return the bill to the Parliament with written reasons. The Parliament may pass the bill a second time by an absolute majority of all members, whereupon assent is deemed given.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 16</span><span class="article-title">Budget and Appropriations</span></div><div class="article-body"><p>No expenditure from public funds shall be made except pursuant to an appropriation authorised by the Parliament.</p><p>The Chancellor shall present the annual budget to the Parliament not less than thirty (30) days before the commencement of the financial year to which it relates.</p><p>If the Parliament does not pass an appropriations act before the commencement of the financial year, the Government may expend funds at a rate not exceeding the rate of the preceding year's appropriations, pending passage of the budget.</p></div></div>
+      </div>
+
+      <div class="chapter" id="ch4">
+        <div class="chapter-header"><div class="chapter-label">Chapter IV</div><h2>The Chancellor and the Government</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 17</span><span class="article-title">Executive Authority</span></div><div class="article-body"><p>The executive authority of the Republic is vested in the Chancellor of Insulide.</p><p>The Chancellor shall be responsible for the general direction and control of the Government, the implementation of legislation, and the conduct of foreign affairs.</p><p>The Chancellor and the Government are collectively responsible to the Parliament for the exercise of executive authority.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 18</span><span class="article-title">Appointment of the Chancellor</span></div><div class="article-body"><p>The Chancellor shall be the member of Parliament who commands the confidence of the majority of the Parliament.</p><p>Following a general election, or following a vote of no confidence, the Parliament shall elect a Chancellor by absolute majority within fourteen (14) days.</p><p>If no member obtains an absolute majority within fourteen (14) days, the Parliament shall be dissolved and a general election called.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 19</span><span class="article-title">Ministerial Appointments</span></div><div class="article-body"><p>The Chancellor shall appoint Ministers of the Government, who shall individually be responsible for the administration of the portfolios assigned to them.</p><p>Each Minister shall be appointed on the basis of demonstrated professional expertise in their portfolio area. Political affiliation shall not be a disqualifying factor, but shall not constitute a qualification in itself.</p><p>The number of Ministers shall not exceed fifteen (15) without amendment to this Article.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 20</span><span class="article-title">Vote of No Confidence and Dissolution</span></div><div class="article-body"><p>The Parliament may pass a vote of no confidence in the Chancellor by an absolute majority of all members.</p><p>Upon a successful vote of no confidence, the Chancellor shall resign and the Parliament shall proceed to elect a new Chancellor pursuant to Article 18.</p><p>The Chancellor may, at any time, advise the dissolution of the Parliament and the calling of a general election. A general election shall be held not later than sixty (60) days after dissolution.</p></div></div>
+      </div>
+
+      <div class="chapter" id="ch5">
+        <div class="chapter-header"><div class="chapter-label">Chapter V</div><h2>Economic Governance</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 21</span><span class="article-title">Economic Principles</span></div><div class="article-body"><p>The economy of the Republic shall be founded upon the principles of free markets, open trade, fiscal responsibility, and the rule of law.</p><p>The state shall provide a stable and predictable legal and regulatory environment conducive to investment, enterprise, and innovation.</p><p>The Parliament shall not enact legislation that creates an unnecessary impediment to economic activity without a compelling and proportionate public interest justification.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 22</span><span class="article-title">Corporate Taxation</span></div><div class="article-body"><p>The standard rate of corporate income tax shall not exceed zero per cent (0%) of net profit.</p><p>The state may, by legislation passed pursuant to the Investment Incentives Act, establish a negative effective corporate tax rate, expressed as a net credit payable by the state to qualifying enterprises, of up to five per cent (5%) of eligible capital expenditure per annum.</p><p>The rate specified in clause (1) of this Article may not be increased except by a referendum of the citizenry in accordance with Article 37(2), in which not fewer than two-thirds of all registered voters participate, and in which a majority vote in favour of the increase.</p><p>No retrospective increase in corporate tax shall be made. Any change in the rate shall apply prospectively only, with not less than five (5) years' notice to affected enterprises.</p><div class="entrenched-notice">⚠ ENTRENCHED PROVISION — Amendment requires unanimous parliamentary vote + referendum. See Article 37.</div></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 23</span><span class="article-title">Free Trade and Port Operations</span></div><div class="article-body"><p>The Port of Insulide shall operate as a free port. No tariff, duty, or levy shall be imposed on goods in transit through the Port.</p><p>The Parliament may impose reasonable port fees to cover the cost of port administration and infrastructure, provided such fees are non-discriminatory and publicly published.</p><p>Insulide shall seek, as a standing matter of foreign policy, to conclude free trade agreements with all willing partners. The Chancellor shall report annually to the Parliament on the status of all trade negotiations.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 24</span><span class="article-title">Budget and Fiscal Rules</span></div><div class="article-body"><p>The Government shall maintain the public finances of the Republic on a sound and sustainable basis.</p><p>The Parliament shall not appropriate expenditure that causes the annual fiscal deficit to exceed three per cent (3%) of gross domestic product in any financial year, except in the event of a declared national emergency.</p><p>The Government shall publish a medium-term fiscal plan covering a period of not less than five (5) years, updated annually alongside the budget.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 25</span><span class="article-title">The Insulide Stock Exchange</span></div><div class="article-body"><p>The Insulide Stock Exchange is hereby established as an independent statutory institution.</p><p>The Exchange shall operate under the supervision of the Insulide Financial Regulatory Authority, which shall be independent of the Government and shall report directly to the Parliament.</p><p>No Minister, member of Parliament, or public official shall hold a direct financial interest in any entity listed on the Exchange during the term of their appointment or election, subject to the interests disclosed in the Register of Interests.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 26</span><span class="article-title">Pharmaceutical and Advanced Manufacturing Sectors</span></div><div class="article-body"><p>The Parliament may, by legislation, establish special regulatory frameworks for the pharmaceutical, biotechnology, and advanced manufacturing sectors, including accelerated licensing pathways and investment incentives.</p><p>Any such framework shall be consistent with the Republic's international treaty obligations and shall not be used to facilitate the circumvention of legitimate intellectual property protections.</p></div></div>
+      </div>
+
+      <div class="chapter" id="ch6">
+        <div class="chapter-header"><div class="chapter-label">Chapter VI</div><h2>The Judiciary</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 27</span><span class="article-title">Judicial Independence</span></div><div class="article-body"><p>The judiciary of the Republic is independent of the executive and the legislature.</p><p>Judges shall hold office during good behaviour and shall not be removed except by address of the Parliament supported by a two-thirds majority, on grounds of incapacity or misconduct established by a judicial tribunal.</p><p>The remuneration of judges shall not be reduced during their term of office.</p><div class="entrenched-notice">⚠ ENTRENCHED PROVISION — Amendment requires unanimous parliamentary vote + referendum. See Article 37.</div></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 28</span><span class="article-title">Court Structure</span></div><div class="article-body"><p>The courts of the Republic shall consist of:</p><ul class="clause-list"><li data-n="(1)">The Constitutional Court, which is the supreme court for all matters of constitutional law;</li><li data-n="(2)">The Commercial Court, which shall have jurisdiction over commercial, corporate, and financial disputes;</li><li data-n="(3)">The General Court, which shall have jurisdiction over all other civil and criminal matters;</li><li data-n="(4)">Such other courts and tribunals as may be established by legislation.</li></ul></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 29</span><span class="article-title">The Constitutional Court</span></div><div class="article-body"><p>The Constitutional Court shall consist of five (5) judges appointed by the Parliament on the recommendation of an independent judicial appointments commission.</p><p>The Constitutional Court shall have exclusive jurisdiction to determine the constitutionality of any law, executive act, or decision of a public body.</p><p>Any person may apply to the Constitutional Court for relief where a right guaranteed by Chapter II of this Charter has been infringed or threatened.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 30</span><span class="article-title">Insulide Sovereign Jurisdiction</span></div><div class="article-body"><p>The courts of the Republic shall apply the law of Insulide, including this Charter, applicable legislation, and the common law of Insulide as developed by the courts.</p><p>The courts shall have regard to international law and the jurisprudence of foreign courts as a persuasive, but not binding, source of law.</p><p>No judgment of a foreign court shall be enforceable within the Republic without recognition by the courts of Insulide in accordance with the Private International Law Act.</p><div class="entrenched-notice">⚠ ENTRENCHED PROVISION — Amendment requires unanimous parliamentary vote + referendum. See Article 37.</div></div></div>
+      </div>
+
+      <div class="chapter" id="ch7">
+        <div class="chapter-header"><div class="chapter-label">Chapter VII</div><h2>Foreign Affairs and Sovereignty</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 31</span><span class="article-title">Foreign Policy Principles</span></div><div class="article-body"><p>The foreign policy of the Republic shall be guided by the principles of sovereign equality, non-interference in the internal affairs of other states, peaceful resolution of disputes, and the promotion of free and open trade.</p><p>Insulide shall seek to maintain cordial and mutually beneficial relations with all states and international organisations.</p><p>The Republic shall maintain a lean but effective diplomatic presence in key commercial and diplomatic centres.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 32</span><span class="article-title">Treaty-Making</span></div><div class="article-body"><p>The power to conclude treaties and international agreements is vested in the Chancellor, acting on behalf of the Republic.</p><p>Any treaty that imposes financial obligations on the Republic, affects the rights of citizens, or modifies the domestic law of Insulide shall require ratification by the Parliament by a simple majority before coming into force.</p><p>No treaty shall be ratified that purports to cede, diminish, or impair the sovereignty of the Republic or the jurisdiction of its courts.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 33</span><span class="article-title">Defence and Security</span></div><div class="article-body"><p>The Parliament shall provide by law for the security and defence of the Republic, including the establishment of a coast guard and police service.</p><p>The use of force abroad shall not be authorised except in the exercise of the inherent right of self-defence under international law, and shall in all cases require the prior approval of the Parliament.</p></div></div>
+      </div>
+
+      <div class="chapter" id="ch8">
+        <div class="chapter-header"><div class="chapter-label">Chapter VIII</div><h2>Public Administration</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 34</span><span class="article-title">Principles of Public Administration</span></div><div class="article-body"><p>The public administration of the Republic shall be governed by the principles of legality, impartiality, transparency, accountability, and efficiency.</p><p>Appointments to the public service shall be made on merit. Political patronage in public appointments is prohibited.</p><p>Every person has the right of access to information held by any public body, subject only to such limitations as are necessary to protect legitimate state interests, the privacy of individuals, or the confidentiality of commercial information.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 35</span><span class="article-title">Register of Interests</span></div><div class="article-body"><p>The Parliament shall maintain a publicly accessible Register of Interests in which all members of Parliament, Ministers, and senior public officials shall disclose all financial interests, directorships, and significant assets within thirty (30) days of taking office and annually thereafter.</p><p>Failure to make a required disclosure, or the making of a false disclosure, shall be an offence punishable by removal from office and such further penalties as the Parliament may prescribe.</p></div></div>
+      </div>
+
+      <div class="chapter" id="ch9">
+        <div class="chapter-header"><div class="chapter-label">Chapter IX</div><h2>Amendment</h2></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 36</span><span class="article-title">General Amendment Procedure</span></div><div class="article-body"><p>This Charter may be amended by a bill passed by the Parliament by a two-thirds majority of all members, followed by a referendum in which a majority of votes cast are in favour of the amendment.</p><p>No amendment may be put to referendum unless it has been published in the Official Gazette not less than ninety (90) days before the date of the referendum.</p><p>An amendment to this Charter shall come into force upon certification of the referendum result by the Electoral Commission.</p></div></div>
+        <div class="article"><div class="article-header"><span class="article-num">ARTICLE 37</span><span class="article-title">Entrenched Provisions</span></div><div class="article-body"><p>The following provisions of this Charter are entrenched and shall not be subject to amendment under the general procedure in Article 36:</p><ul class="clause-list"><li data-n="(1)">Article 9 (Freedom of Commerce), insofar as it prohibits tariffs on goods in transit;</li><li data-n="(2)">Article 22 (Corporate Taxation), insofar as it establishes the zero per cent rate;</li><li data-n="(3)">Article 27 (Judicial Independence);</li><li data-n="(4)">Article 30 (Insulide Sovereign Jurisdiction);</li><li data-n="(5)">Article 37 (this Article).</li></ul><p>An entrenched provision may be amended only by a bill passed by a unanimous vote of all members of Parliament, followed by a referendum in which not fewer than two-thirds of all registered voters participate and a majority vote in favour of the amendment.</p><div class="entrenched-notice">⚠ ENTRENCHED PROVISION — This Article is itself entrenched and subject to the same unanimous vote requirement.</div></div></div>
+      </div>
+
+      <div class="attestation" id="attestation">
+        <p>This Charter was duly adopted by the Constituent Assembly of the Republic of Insulide,<br>meeting in full session within the Governance Tower,<br>on the first day of January, in the year two thousand and twenty-four.</p>
+        <br>
+        <p>Done in the English, French, and Russian languages, each version being equally authentic,<br>provided that in the event of inconsistency the English text shall prevail.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 REPUBLIC OF INSULIDE — DOCUMENT REF: CONST-001-EN</p>
+    <p><a href="index.html">← Return to Government Portal</a></p>
+  </footer>
+
+  <script>
+    const chapters = document.querySelectorAll('[id]');
+    const tocLinks = document.querySelectorAll('.toc a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.toc a[href="#${e.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    chapters.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
